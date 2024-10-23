@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+<!--Will show the data is the visible is true or false-->
+    <div x-data="{visible: false}">
+        <div x-show="!visible">Some Content Here If Visible is True</div>
+    </div>
+<hr>
+
+<!--Will show the data if the length is greater-->
+<div x-data="{records: [1, 2, 3]}">
+    <div x-show="records.length >= 1">Showing this content if the records are greater than 1</div>
+</div>
+<hr>
+
+<!--Visible on the click on button-->
+<div x-data="{show: false}">
+    <button @click="show = !show">Toggle @click</button>
+    👈🏻 Both the methods works the same 👉🏻
+    <button x-on:click="show = !show">Toggle with x-on:click</button>
+    <div x-show="show" x-transition>
+        This will be shown with the toggle button.
+    </div>
+</div>
+<hr>
+
+<!--The counter using click-->
+<div x-data="{number: 0}">
+    <button @click="number += 1">Add ➕</button>
+    <button @click="number -= 1">Sub ➖</button>
+    <div x-text="number"></div>
+
+    <div x-show="number > 10" x-transition>This message is shown because number is greater than 10</div>
+    <div x-show="number < -5" x-transition>This message is shown because number is less than -5</div>
+</div>
+
+</body>
+</html>
