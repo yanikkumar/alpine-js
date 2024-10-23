@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alpine JS</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <div x-data="{name: ''}">
+      <input
+        type="text"
+        x-model="name"
+        placeholder="Type the text & see preview"
+      />
+      <span x-text="name.length"></span><br />
+      <!-- This will show the total length of characters in the input string -->
+      <span x-text="name"></span>
+      <!-- This will showcase the data which is being input in the textbox -->
+    </div>
+
+    <hr />
+
+    <form x-data="{name: ''}" @submit.prevent="console.log(name)">
+      <input
+        type="text"
+        x-model="name"
+        placeholder="Type text & check console"
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <hr />
+
+    <!-- Two way data binding -->
+    <div
+      x-data="{name: '', makeNameUpperCase() {this.name=this.name.toUpperCase()}}"
+    >
+      <input
+        type="text"
+        x-model="name"
+        placeholder="Type text Submit to Uppercase"
+      />
+      <span x-text="name"></span>
+      <button @click="makeNameUpperCase">UpperCase Data</button>
+    </div>
+  </body>
+</html>
