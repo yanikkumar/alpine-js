@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alpine JS</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+      .blueviolet {
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <div x-data>
+      <span class="blueviolet" x-bind:class="{'bold': true}"
+        >Am I blueviolet bold?</span
+      >
+    </div>
+
+    <hr />
+
+    <div
+      x-data="{
+    selected: false
+    }"
+    >
+      <span x-bind:class="{'bold': selected}">Is this bold text?</span>
+
+      <button @click="selected = true">Make Bold</button>
+    </div>
+
+    <hr />
+
+    <form x-data="{name: ''}" @submit.prevent="alert(`Hey! ${name}`)">
+      <input type="text" x-model="name" />
+      <button type="submit" x-bind:disabled="name == ''">Let's Go</button>
+    </form>
+
+    <hr />
+
+    <div
+      x-data="{
+    progress: 0}"
+    >
+    <progress max="100" x-bind:value="progress">
+        <span x-text="`${progress}%`"></span>
+    </progress>
+
+    <button @click="progress += 5">Increse 5%</button>
+</div>
+  </body>
+</html>
