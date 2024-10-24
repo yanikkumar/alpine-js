@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <div x-data="{agreed: false}">
+        <input type="checkbox" x-model="agreed" />
+        <span x-show="agreed">
+            You have agreed the terms and conditions.
+        </span>
+    </div>
+    <hr>
+
+    <div x-data="{records: []}">
+        <input type="checkbox" name="record_1" x-model="records" value="1">
+        <input type="checkbox" name="record_2" x-model="records" value="2">
+        <input type="checkbox" name="record_3" x-model="records" value="3">
+        <br>
+        <span x-text="records"></span>
+    </div>
+
+    <hr>
+
+    <div x-data="{users: []}">
+        <input type="checkbox" name="record_1" x-model="records" value="1"> Yanik Kumar
+        <input type="checkbox" name="record_2" x-model="records" value="2"> Believe Master
+        <input type="checkbox" name="record_3" x-model="records" value="3"> Coding Ninja
+        <br>
+        <span x-text="records"></span>
+    </div>
+
+</body>
+</html>
