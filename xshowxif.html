@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+<div x-data="
+{
+show:false
+}
+">
+    <div x-show="show">Am I visible?</div>
+    <button @click="show=!show">Toggle Show</button>
+</div>
+
+<hr/>
+
+<div x-data="
+{
+show:false
+}
+">
+    <button @click="show=true">Show Me</button>
+    <template x-if="show">
+        <div>Am I visible using x-if?</div>
+    </template>
+</div>
+
+<hr/>
+
+<div x-data="
+{
+show: false,
+users: [
+    {id: 1, name: 'Alex', points: 32},
+    {id:2, name: 'Bob', points: 25},
+    {id: 3, name:'John', points: 44},
+    {id: 4, name: 'Jane', points: 20}
+    ],
+
+    usersOrderByPoints() {
+        console.log('show called on click of button using x-if');
+        return  this.users.sort((a,b) => b.points - a.points)
+    }
+}
+">
+    <button @click="show=true">Show User</button>
+    <template x-if="show">
+        <template x-for="user in usersOrderByPoints()" :key="user.id">
+            <div>
+                <span x-text="user.name"></span>
+                (<span x-text="user.points"></span>)
+            </div>
+        </template>
+    </template>
+</div>
+</body>
+</html>
