@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: slategray;
+        }
+    </style>
+</head>
+<body>
+<form x-data x-on:submit.prevent="console.log('submitted')">
+        <textarea
+                cols="30" rows="10"
+                x-data="{shiftHeld: false}"
+                x-on:keydown.shift="shiftHeld=true"
+                x-on:keyup.shift="shiftHeld=false"
+                x-on:keyup.enter="if(!shiftHeld) {$el.closest('form').dispatchEvent(new Event('submit'))}"
+        ></textarea>
+</form>
+
+<hr>
+
+<div x-data="{open: false}">
+    <button @click="open = true">Open Menu</button>
+
+    <div x-show="open" class="box" x-on:click.outside="open = false">
+        Menu Content
+    </div>
+</div>
+
+</body>
+</html>
