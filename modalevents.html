@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .modal-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 30%;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-wrapper"
+         x-data="{open: false}"
+         x-show="open"
+         x-on:open-modal.window="open = true"
+         x-on:keyup.escape.window="open = false"
+    >
+        <div class="modal" @click.outside="open = false">
+            I am a Modal
+        </div>
+    </div>
+    <button x-data @click="$dispatch('open-modal')">Trigger</button>
+
+    <hr />
+
+    <div x-data="{message: ''}" x-on:message.window="message = $event.detail.message">
+        <span x-text="message"></span>
+    </div>
+
+<button x-data x-on:click="$dispatch('message', {message: 'Hello World'})">Set Message</button>
+</body>
+</html>
