@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div x-data="{
+    numbers: [1,2,3,4,5]
+    }">
+    <template x-for="number in numbers">
+        <span x-text="number"></span>
+    </template>
+</div>
+
+<hr>
+<!--With key index-->
+<div x-data="{
+fruits: ['oranges', 'bananas', 'apple' , 'mangoes' , 'grapes']}">
+    <template x-for="fruit, index in fruits">
+        <div>
+            <span x-text="index+1"></span>
+            <span x-text="fruit"></span>
+        </div>
+    </template>
+</div>
+
+<hr>
+<div x-data="{
+people: [{id: 1, name: 'Alex'}, {id:2, name: 'Bob'} ,{id: 3, name:'John'} ,{id: 4, name: 'Jane'}]}">
+    <template x-for="person in people" :key="person.id">
+        <div>
+            <span x-text="person.name"></span>
+        </div>
+    </template>
+</div>
+
+<hr>
+
+<div x-data="{
+people: [
+    {id: 1, name: 'Alex', points: 32},
+    {id:2, name: 'Bob', points: 25},
+    {id: 3, name:'John', points: 44},
+    {id: 4, name: 'Jane', points: 20}
+    ],
+
+get peopleSortedByPoint() {
+    return this.people.sort((a,b) => b.points - a.points)
+    },
+increasePoints(id) {
+    this.people.find((p) => p.id === id).points++
+}
+}">
+    <template x-for="person in peopleSortedByPoint" :key="person.id">
+        <div>
+            <span x-text="person.name"></span> (<span x-text="person.points"></span>)
+            <button @click="increasePoints(person.id)">Increase Points</button>
+        </div>
+    </template>
+</div>
+
+
+</body>
+</html>
