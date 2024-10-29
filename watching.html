@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+<div x-data="{
+       message: 'Hello',
+
+       init() {
+            this.$watch('message', (value) => {
+                console.log('changed to: ', value);
+            });
+       }
+    }">
+    <span x-text="message"></span>
+    <button @click="message='Something else'">Change Message</button>
+</div>
+
+<hr>
+
+<div x-data="{
+    query: '',
+    results: [],
+    performSearch(){
+        this.results = [
+       'apple', 'banana', 'grapes'
+       ];
+    },
+    init() {
+        this.$watch('query', (query) => {
+            this.performSearch(query)
+        })
+    }
+}"
+>
+    <span x-text="results"></span>
+    <input type="text" x-model="query">
+</div>
+</body>
+</html>
