@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div x-data x-init="$el.innerHTML=marked.parse($el.innerText)">
+    This is **Markdown**
+</div>
+
+<hr/>
+
+<div style="cursor: pointer" x-data x-on:click="window.navigator.clipboard.writeText($el.innerText); alert('Text copied: ' + $el.innerText);">
+    Click this text to copy
+</div>
+
+<hr>
+
+<input x-data type="text" value="This text will be selected and copied" @click="window.navigator.clipboard.writeText($el.value); $el.select(); alert('Text copied: ' + $el.value);"></input>
+</body>
+</html>
