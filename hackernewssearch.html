@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+<div x-data="{
+    query: '',
+    results: [],
+    performSearch(query) {
+        fetch(`https://hn.algolia.com/api/v1/search?query=${query}`)
+            .then(response => response.json())
+                    .then(results => this.results = results.hits)
+    },
+
+    init() {
+        this.$watch('query', (query) => {
+        if(query === '') {
+            this.results = [];
+            return
+        }
+            this.performSearch(query)
+        })
+    }
+   }">
+    <input type="text" x-model.debounce.500="query" placeholder="Search your query...">
+    <p x-show="query.length">
+        Your search for <span x-text="query" style="font-weight: bold"></span> returned <span
+            x-text="results.length"></span> results
+    </p>
+
+    <div>
+        <template x-for="result in results" :key="result.objectID">
+            <div>
+                <h4 x-text="result.title"></h4>
+                <a x-bind:href="result.url" x-text="result.url"></a>
+            </div>
+        </template>
+    </div>
+</div>
+</body>
+</html>
