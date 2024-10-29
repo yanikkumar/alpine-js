@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alpine JS</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+<form x-data="{
+    imagePreview: null,
+
+    previewImage(e) {
+        const reader = new FileReader()
+        reader.onload = (e) => this.imagePreview = e.target.result
+
+        reader.readAsDataURL(this.$refs.image.files[0])
+    }
+}">
+    <template x-if="imagePreview">
+        <div>
+            <img x-bind:src="imagePreview" style="width: 200px">
+        </div>
+    </template>
+    <input type="file" x-on:change="previewImage" x-ref="image"/>
+</form>
+</body>
+</html>
